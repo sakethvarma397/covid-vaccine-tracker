@@ -1,5 +1,7 @@
 body {
-  background-color: aliceblue;
+  background-image: url("vaccine.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 #root {
@@ -8,41 +10,42 @@ body {
   justify-content: center;
 }
 
-header {
+h1 {
   text-align: center;
-  font-weight: 100;
-  font-size: 25px;
   margin-bottom: 20px;
 }
 
-.input-pincode {
-  width: 80px;
+.state-district {
+  display: grid;
+  grid-template-columns: 80px 180px 180px 80px;
+  padding: 2px;
+  align-items: center;
+  margin-bottom: 5px;
+}
+select {
+  padding: 2px;
+}
+
+.container {
+  justify-content: center;
+  display: grid;
 }
 
 .pincode-form {
   display: grid;
-  grid-template-columns: 100px 80px 60px;
+  grid-template-columns: 150px 180px 80px;
   padding: 2px;
+  align-items: center;
+  height: auto;
+}
+table {
+  background-color: rgb(11, 115, 206);
 }
 
 .phonenumber-form {
   display: grid;
-  grid-template-columns: 180px 120px 100px;
+  grid-template-columns: 150px 180px 80px;
   padding: 2px;
-}
-
-.centers {
-  display: grid;
-  grid-template-columns: 150px 150px 80px 60px;
-  font-size: small;
-  font-family: Arial, Helvetica, sans-serif;
-  justify-content: center;
-  margin: 10px 0px 10px 0px;
-  align-items: center;
-}
-.center-name {
-  color: brown;
-  font-weight: 200px;
 }
 
 .tracked {
@@ -53,6 +56,68 @@ header {
   background-color: rgb(216, 235, 253);
 }
 
+.available {
+  background-color: rgb(145, 238, 238);
+}
+
 .notify {
   justify-content: center;
+}
+.no-centers {
+  display: grid;
+  justify-content: center;
+}
+#modal {
+  background-color: rgba(0, 0, 0, 0.9);
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#modal:empty {
+  display: none;
+}
+
+#modal > div {
+  max-width: 600px;
+  padding: 15px;
+  margin: 20px;
+  text-align: center;
+  border-radius: 30px;
+}
+
+.modal-content {
+  width: 500px;
+  height: 230px;
+  border: none;
+}
+.modal-content h2 {
+  margin-top: 20px;
+}
+.modal-buttons {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.selected-center-details {
+  display: grid;
+  justify-content: center;
+}
+
+.selected-centers {
+  color: brown;
+}
+
+.results {
+  width: 600px;
+}
+
+.available-slots {
+  text-align: center;
 }

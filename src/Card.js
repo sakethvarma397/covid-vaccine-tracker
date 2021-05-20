@@ -1,21 +1,21 @@
 import React from "react";
 
-const Card = ({ centers, addToNotify, notifyList, date }) => {
-  const selectCenter = (id) => {
-    console.log(id, "has been selected");
-    addToNotify(id);
+const Card = ({ centers, sessions, addToNotify, notifyList, date }) => {
+  centers = centers ? centers : sessions;
+  const selectCenter = (id, name) => {
+    addToNotify({ id: id, name: name });
   };
   const data = centers.map((center) => (
     <CenterInfo
       {...center}
-      tracked={notifyList.find((center_id) => center_id === center.center_id)}
+      tracked={notifyList.find((item) => item.id === center.center_id)}
       name={center.name}
       key={center.center_id}
       selectCenter={selectCenter}
       date={date}
     />
   ));
-  return <div>{data}</div>;
+  return date ? <>{data}</> : null;
 };
 
 const CenterInfo = ({
@@ -23,23 +23,36 @@ const CenterInfo = ({
   center_id,
   name,
   sessions,
+  available_capacity,
   selectCenter,
   tracked,
 }) => {
-  var className = tracked ? "tracked" : "not-tracked";
+  let className = tracked ? "tracked" : "not-tracked";
+  let btnClassname = tracked ? "btn-success" : "btn-info";
+  available_capacity = sessions
+    ? sessions[0].available_capacity
+    : available_capacity;
+  var availablity = available_capacity > 0 ? "available" : "not-available";
   return (
-    <div className={`centers ${className}`}>
-      <div className="centre-name">{name}</div>
-      <div>{`Available slots : ${sessions[0].available_capacity}`}</div>
-      <div>{date}</div>
-      <button
-        onClick={() => {
-          selectCenter(center_id);
-        }}
-      >
-        Track
-      </button>
-    </div>
+    <tr className={` ${className} ${availablity}`}>
+      <td className="centre-name">{name}</td>
+      <td className="available-slots">{available_capacity}</td>
+      <td>{date}</td>
+      <td>
+        {available_capacity > 0 ? (
+          <div>Available</div>
+        ) : (
+          <button
+            className={`btn ${btnClassname}`}
+            onClick={() => {
+              selectCenter(center_id, name);
+            }}
+          >
+            {tracked ? "Tracking" : "Track"}
+          </button>
+        )}
+      </td>
+    </tr>
   );
 };
 export default Card;
